@@ -41,7 +41,25 @@ public class Chatbox : Control
             {
                 lineEdit.ReleaseFocus();
             }
+            else if ((KeyList)keyEvent.Scancode == KeyList.Tab)
+            {
+                _ChangeGroup();
+            }
         }
+    }
+
+    public string _GetCategoryName()
+    {
+        return label.Text.Split(" ")[0];
+    }
+
+    public void _ChangeGroup()
+    {
+        string oldCategory = _GetCategoryName();
+        if (oldCategory == "Say")
+            label.Text = "Group :";
+        else if (oldCategory == "Group")
+            label.Text = "Say :";
     }
 
     public void _AddMessage(string name, string text, string groupName="Say")
@@ -49,16 +67,21 @@ public class Chatbox : Control
         // Set Color
         string textSend = "[color="+ categories[groupName]+"]";
         // Add a Name
-        textSend += "[b]"+name +"[/b] : ";
+        textSend += "[b]["+name +"][/b] : ";
         // Put Text
-        textSend += text +"\n";
+        textSend += text +"[/color]\n";
         chatLog.AppendBbcode(textSend);
     }
 
     public void _TextEntered(string text)
     {
         lineEdit.Text = "";
-        _AddMessage(userName, text);
+        if (text != "")
+        {
+            _AddMessage(userName, text, _GetCategoryName());
+            // Send Message to the server ! 
+        }
+        
     }
 
 
