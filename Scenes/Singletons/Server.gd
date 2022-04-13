@@ -4,14 +4,13 @@ var network = NetworkedMultiplayerENet.new()
 var ip = '127.0.0.1'
 var port = 1909
 
-var fakeConnection = false
+var connectionToServer = false
 
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	if fakeConnection:
+	if connectionToServer:
 		connectToServer()
-
 
 func connectToServer():
 	network.create_client(ip, port)
@@ -27,3 +26,13 @@ func _OnConnectionFailed():
 
 func _OnConnectionSucceeded():
 	print('Connected to server')
+
+
+func sendChatMessage(message):
+	rpc_id(1, "addMessageToChat", message)
+
+
+remote func messageReceived(msg, playerId):
+	print('Message reçu qui a été envoyé par le server')
+	# Link to chat
+	
