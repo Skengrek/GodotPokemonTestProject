@@ -1,7 +1,7 @@
 [gd_scene load_steps=27 format=2]
 
 [ext_resource path="res://Assets/Entities/Player.png" type="Texture" id=1]
-[ext_resource path="res://Scripts/player.cs" type="Script" id=2]
+[ext_resource path="res://Scenes/Entities/player.gd" type="Script" id=2]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 16, 16 )
@@ -210,9 +210,9 @@ blend_mode = 1
 [sub_resource type="AnimationNodeStateMachine" id=12]
 states/Idle/node = SubResource( 27 )
 states/Idle/position = Vector2( 109, 78 )
-states/Walking/node = SubResource( 22 )
-states/Walking/position = Vector2( 293, 78 )
-transitions = [ "Idle", "Walking", SubResource( 28 ), "Walking", "Idle", SubResource( 29 ) ]
+states/Walk/node = SubResource( 22 )
+states/Walk/position = Vector2( 365, 78 )
+transitions = [ "Idle", "Walk", SubResource( 28 ), "Walk", "Idle", SubResource( 29 ) ]
 
 [sub_resource type="AnimationNodeStateMachinePlayback" id=13]
 
@@ -227,12 +227,7 @@ __meta__ = {
 texture = ExtResource( 1 )
 hframes = 6
 vframes = 6
-frame = 1
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="Sprite"]
-
-[node name="AnimationTree" type="AnimationTree" parent="Sprite/AnimationPlayer"]
-anim_player = NodePath("..")
+frame = 8
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2( 0, 4 )
@@ -256,5 +251,5 @@ tree_root = SubResource( 12 )
 anim_player = NodePath("../AnimationPlayer")
 active = true
 parameters/playback = SubResource( 13 )
-parameters/Idle/blend_position = Vector2( -0.000877976, 0.0172414 )
-parameters/Walking/blend_position = Vector2( -0.0131695, 0.224138 )
+parameters/Idle/blend_position = Vector2( 0, 0 )
+parameters/Walk/blend_position = Vector2( 0, 0 )
