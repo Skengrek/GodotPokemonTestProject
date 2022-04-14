@@ -4,6 +4,7 @@ onready var chatLog = get_node("ChatContainer/ChatBox")
 onready var inputLabel = get_node("ChatContainer/EditContainer/Label")
 onready var inputField = get_node("ChatContainer/EditContainer/LineEdit")
 onready var player = get_node("/root/Node2D/Player")
+onready var server = get_node("/root/Server")
 
 var categories = {
 	'Say': '#ffffff',
@@ -59,8 +60,11 @@ func textEntered(text):
 	if text != '':
 		player.setMovement(true)
 		inputField.text = ''
-		# Send message to server
-		rpc_id(1, "addMessageToChat", text)
+		if server.connectionToServer:
+			# Send message to server
+			rpc_id(1, "addMessageToChat", text)
+		else:
+			server.messageReceived(text, 00000)
 		# Finally
 		inputField.release_focus()
 	

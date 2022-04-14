@@ -36,6 +36,13 @@ __meta__ = {
 "_edit_group_": true
 }
 
+[node name="ColorRect" type="ColorRect" parent="."]
+margin_right = 346.0
+margin_bottom = 181.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+color = Color( 0.25098, 0.25098, 0.25098, 0.784314 )
+
 [node name="ChatContainer" type="VBoxContainer" parent="."]
 margin_right = 346.0
 margin_bottom = 181.0
