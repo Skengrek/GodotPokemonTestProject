@@ -1,6 +1,6 @@
 [gd_scene load_steps=10 format=2]
 
-[ext_resource path="res://Scripts/Chat.gd" type="Script" id=1]
+[ext_resource path="res://Scenes/GUI/Chat.gd" type="Script" id=1]
 [ext_resource path="res://Assets/Fonts/IBMPlexSerif-Bold.ttf" type="DynamicFontData" id=2]
 
 [sub_resource type="DynamicFontData" id=1]
@@ -63,7 +63,7 @@ margin_bottom = 181.0
 margin_top = 5.0
 margin_right = 29.0
 margin_bottom = 19.0
-text = "Say :"
+text = "[Say]"
 
 [node name="LineEdit" type="LineEdit" parent="ChatContainer/EditContainer"]
 margin_left = 33.0

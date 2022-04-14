@@ -3,10 +3,11 @@ extends Control
 onready var chatLog = get_node("ChatContainer/ChatBox")
 onready var inputLabel = get_node("ChatContainer/EditContainer/Label")
 onready var inputField = get_node("ChatContainer/EditContainer/LineEdit")
+onready var player = get_node("/root/Node2D/Player")
 
 var categories = {
-	'Say': '#00abc7',
-	'Group': '#ffffff',
+	'Say': '#ffffff',
+	'Group': '#00abc7',
 	'Global': '#FFF113'
 }
 
@@ -14,15 +15,18 @@ var catKey = 'Say'
 var user_name = 'Player'
 
 func _ready():
-	inputField.connect("text_entered", self,'text_entered')
+	inputField.connect("text_entered", self,'textEntered')
 	catKey = 'Say'
+
 
 func _input(event):
 	if event is InputEventKey:
 		if event.pressed and event.scancode == KEY_ENTER:
 			inputField.grab_focus()
+			player.setMovement(false)
 		if event.pressed and event.scancode == KEY_ESCAPE:
 			inputField.release_focus()
+			player.setMovement(true)
 		if event.pressed and event.scancode == KEY_TAB:
 			change_group()
 
@@ -33,10 +37,10 @@ func change_group():
 	else:
 		catKey = 'Say'
 
-	inputLabel.text = '[' + categories[catKey]['name'] + ']'
-	inputLabel.set("custom_colors/font_color", Color(categories[catKey]['color']))
+	inputLabel.text = '[' + catKey + ']'
+	inputLabel.set("custom_colors/font_color", Color(categories[catKey]))
 	
-func add_message(username, text, category = '', color = ''):
+func addMessage(username, text, category = '', color = ''):
 	if category == '':
 		category = catKey
 
@@ -51,13 +55,13 @@ func add_message(username, text, category = '', color = ''):
 	chatLog.bbcode_text += '[/color]'
 
 
-func text_entered(text):
-	if text =='/h':
-		add_message('', 'There is no help message yet!', 'Say')
-		inputField.text = ''		
-		return
+func textEntered(text):
 	if text != '':
-		add_message(user_name, text)
-		# Here you have to send the message to the server
-		print(text)
+		player.setMovement(true)
 		inputField.text = ''
+		# Send message to server
+		rpc_id(1, "addMessageToChat", text)
+		# Finally
+		inputField.release_focus()
+	
+	

@@ -2,7 +2,7 @@ extends Node
 
 var network = NetworkedMultiplayerENet.new()
 var ip = '127.0.0.1'
-var port = 1909
+var port = 6970
 
 var connectionToServer = false
 
@@ -18,6 +18,7 @@ func connectToServer():
 
 	network.connect('connection_failed', self, '_OnConnectionFailed')
 	network.connect('connection_succeeded', self, '_OnConnectionSucceeded')
+	print('Client Connected')
 
 
 func _OnConnectionFailed():
@@ -33,6 +34,6 @@ func sendChatMessage(message):
 
 
 remote func messageReceived(msg, playerId):
-	print('Message reçu qui a été envoyé par le server')
+	print('Message received from the server')
 	# Link to chat
 	

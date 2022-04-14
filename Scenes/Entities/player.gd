@@ -2,6 +2,7 @@ extends KinematicBody2D
 
 export (int)var speed = 200
 var velocity = Vector2()
+var canMove = true
 
 onready var isMoving = false
 onready var animTree = $playerAnimTree
@@ -10,9 +11,14 @@ onready var animState = animTree.get('parameters/playback')
 func _ready():
 	animState.start('Idle')
 
+func setMovement(_bool):
+	print(_bool)
+	canMove = _bool
+
 func _physics_process(delta):
-	get_input()
-	velocity = move_and_slide(velocity)
+	if canMove:
+		get_input()
+		velocity = move_and_slide(velocity)
 
 func get_input():
 	velocity = Vector2()

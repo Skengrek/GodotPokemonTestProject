@@ -216,7 +216,7 @@ transitions = [ "Idle", "Walk", SubResource( 28 ), "Walk", "Idle", SubResource( 
 
 [sub_resource type="AnimationNodeStateMachinePlayback" id=13]
 
-[node name="KinematicBody2D" type="KinematicBody2D"]
+[node name="Body" type="KinematicBody2D"]
 position = Vector2( 55, 67 )
 script = ExtResource( 2 )
 __meta__ = {
@@ -227,7 +227,7 @@ __meta__ = {
 texture = ExtResource( 1 )
 hframes = 6
 vframes = 6
-frame = 8
+frame = 1
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2( 0, 4 )
