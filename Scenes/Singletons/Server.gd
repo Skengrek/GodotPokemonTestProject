@@ -4,7 +4,7 @@ var network = NetworkedMultiplayerENet.new()
 var ip = '127.0.0.1'
 var port = 6970
 
-var connectionToServer = false
+var connectionToServer = true
 onready var chat = get_node("/root/Node2D/ChatScene")
 
 # Called when the node enters the scene tree for the first time.
