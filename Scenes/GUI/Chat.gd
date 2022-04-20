@@ -7,6 +7,8 @@ onready var chatLog = get_node('ChatContainer/ChatBox')
 onready var inputLabel = get_node('ChatContainer/EditContainer/Label')
 onready var inputField = get_node('ChatContainer/EditContainer/LineEdit')
 
+onready var server = get_node('/root/Server')
+
 var channels = {
 	'Say': '#ffffff',
 	'Group': '#00abc7',

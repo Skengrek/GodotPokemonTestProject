@@ -17,6 +17,7 @@ config/icon="res://icon.png"
 [autoload]
 
 Server="*res://Scenes/Singletons/Server.gd"
+SignalCentral="*res://Scenes/Singletons/SignalCentral.gd"
 
 [importer_defaults]
 
