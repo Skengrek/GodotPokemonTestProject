@@ -31,7 +31,7 @@ func _OnConnectionSucceeded():
 
 
 func sendChatMessage(message):
-	rpc_id(1, "addMessageToChat", message)
+	rpc_id(1, "messageSent", message)
 
 
 remote func messageReceived(username, msg):

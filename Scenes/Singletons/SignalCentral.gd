@@ -10,7 +10,6 @@ func _ready():
 	# Connect Chat signals
 	chat.connect('takeFocus', player, 'setMovement')
 	chat.connect('messageSig', server, 'sendChatMessage')
-	
 	# connect Server signals
 	server.connect('messageReceivedSig', chat, 'addMessage')
 
