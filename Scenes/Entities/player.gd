@@ -12,7 +12,6 @@ func _ready():
 	animState.start('Idle')
 
 func setMovement(_bool):
-	print(_bool)
 	canMove = _bool
 
 func _physics_process(delta):

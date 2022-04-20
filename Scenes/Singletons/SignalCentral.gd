@@ -1,16 +1,17 @@
 extends Node
 
-
-# Declare member variables here. Examples:
-# var a = 2
-# var b = "text"
-
+onready var chat = get_node('/root/Node2D/Chat')
+onready var player = get_node('/root/Node2D/Player')
+onready var server = get_node('/root/Server')
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	pass # Replace with function body.
+	
+	# Connect Chat signals
+	chat.connect('takeFocus', player, 'setMovement')
+	chat.connect('messageSig', server, 'sendChatMessage')
+	
+	# connect Server signals
+	server.connect('messageReceivedSig', chat, 'addMessage')
 
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-#func _process(delta):
-#	pass

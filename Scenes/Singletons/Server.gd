@@ -5,7 +5,8 @@ var ip = '127.0.0.1'
 var port = 6970
 
 var connectionToServer = true
-onready var chat = get_node("/root/Node2D/ChatScene")
+
+signal messageReceivedSig(username, text, channel, color)
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -33,6 +34,6 @@ func sendChatMessage(message):
 	rpc_id(1, "addMessageToChat", message)
 
 
-remote func messageReceived(msg, playerId):
-	chat.addMessage(str(playerId), msg)
+remote func messageReceived(username, msg):
+	emit_signal('messageReceivedSig', username, msg)
 	

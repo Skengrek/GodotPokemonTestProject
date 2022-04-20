@@ -7,8 +7,6 @@ onready var chatLog = get_node('ChatContainer/ChatBox')
 onready var inputLabel = get_node('ChatContainer/EditContainer/Label')
 onready var inputField = get_node('ChatContainer/EditContainer/LineEdit')
 
-onready var server = get_node('/root/Server')
-
 var channels = {
 	'Say': '#ffffff',
 	'Group': '#00abc7',
@@ -16,24 +14,37 @@ var channels = {
 }
 
 var catKey = 'Say' 
-var user_name = 'Player'
+var userName = 'Player'
+var focusState = false
 
 
 func _ready():
 	
 	inputField.connect("text_entered", self,'textEntered')
 	catKey = 'Say'
+	
+	inputField.connect("focus_entered", self, "focusIn")
+	inputField.connect("focus_exited", self, "focusOut")
 
 
 func changeFocus(_bool):
 	"""
 	Give/return the focus to the inputField and emit a signal
 	"""
+	focusState = _bool
 	setPlayerMovement(!_bool)
 	if _bool:
 		inputField.grab_focus()
 	else:
 		inputField.release_focus()
+
+
+func focusIn():
+	changeFocus(true)
+	
+	
+func focusOut():
+	changeFocus(false)
 
 
 func setPlayerMovement(_bool):
@@ -43,7 +54,9 @@ func setPlayerMovement(_bool):
 func _input(event):
 	if event is InputEventKey:
 		if event.pressed and event.scancode == KEY_ENTER:
-			changeFocus(true)
+			if focusState:
+				textEntered(inputField.text)
+			changeFocus(!focusState)
 		if event.pressed and event.scancode == KEY_ESCAPE:
 			changeFocus(false)
 		if event.pressed and event.scancode == KEY_TAB:
