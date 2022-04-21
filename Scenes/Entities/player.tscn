@@ -4,7 +4,7 @@
 [ext_resource path="res://Scenes/Entities/player.gd" type="Script" id=2]
 
 [sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 16, 16 )
+extents = Vector2( 16, 9.5 )
 
 [sub_resource type="Animation" id=2]
 length = 0.001
@@ -230,7 +230,7 @@ vframes = 6
 frame = 1
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2( 0, 4 )
+position = Vector2( 0, 10.5 )
 shape = SubResource( 1 )
 
 [node name="Camera2D" type="Camera2D" parent="."]

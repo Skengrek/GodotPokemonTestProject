@@ -1,5 +1,8 @@
 extends KinematicBody2D
 
+signal playerIsMoving
+signal playerStoppedMoving
+
 export (int)var speed = 200
 var velocity = Vector2()
 var canMove = true
@@ -34,12 +37,14 @@ func get_input():
 	if velocity != Vector2(0, 0):
 		if isMoving == false:
 			animState.travel('Walk')
+			emit_signal("playerIsMoving")
 			isMoving = true
 		animTree.set('parameters/Walk/blend_position', velocity)
 		animTree.set('parameters/Idle/blend_position', velocity)
 	else:
 		if isMoving == true:
 			animState.travel('Idle')
+			emit_signal("playerStoppedMoving")
 			isMoving = false
 
 	# Define velocity
