@@ -1,10 +1,10 @@
-[gd_scene load_steps=27 format=2]
+[gd_scene load_steps=28 format=2]
 
 [ext_resource path="res://Assets/Entities/Player.png" type="Texture" id=1]
 [ext_resource path="res://Scenes/Entities/player.gd" type="Script" id=2]
 
 [sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 16, 9.5 )
+extents = Vector2( 12, 9.25 )
 
 [sub_resource type="Animation" id=2]
 length = 0.001
@@ -216,12 +216,13 @@ transitions = [ "Idle", "Walk", SubResource( 28 ), "Walk", "Idle", SubResource( 
 
 [sub_resource type="AnimationNodeStateMachinePlayback" id=13]
 
+[sub_resource type="CanvasItemMaterial" id=30]
+render_priority = 1
+blend_mode = 1
+
 [node name="Body" type="KinematicBody2D"]
-position = Vector2( 55, 67 )
+position = Vector2( 55, 82 )
 script = ExtResource( 2 )
-__meta__ = {
-"_edit_group_": true
-}
 
 [node name="Sprite" type="Sprite" parent="."]
 texture = ExtResource( 1 )
@@ -230,8 +231,11 @@ vframes = 6
 frame = 1
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2( 0, 10.5 )
+position = Vector2( 0, 7.75 )
 shape = SubResource( 1 )
+__meta__ = {
+"_edit_group_": true
+}
 
 [node name="Camera2D" type="Camera2D" parent="."]
 current = true
@@ -254,3 +258,17 @@ active = true
 parameters/playback = SubResource( 13 )
 parameters/Idle/blend_position = Vector2( 0, 0 )
 parameters/Walk/blend_position = Vector2( 0, 0 )
+
+[node name="LedgeRayCast" type="RayCast2D" parent="."]
+enabled = true
+exclude_parent = false
+cast_to = Vector2( 0, 20 )
+collision_mask = 4
+collide_with_areas = true
+
+[node name="BlockingRayCast" type="RayCast2D" parent="."]
+material = SubResource( 30 )
+enabled = true
+exclude_parent = false
+cast_to = Vector2( 0, 20 )
+collision_mask = 4
