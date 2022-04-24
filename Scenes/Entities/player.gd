@@ -3,7 +3,7 @@ extends KinematicBody2D
 signal playerIsMoving
 signal playerStoppedMoving
 
-export (int)var speed = 8
+export (int)var speed = 4
 export var jumpSpeed = 200
 var newPos = Vector2()
 var canMove = true
@@ -28,39 +28,22 @@ func _physics_process(_delta):
 		var inputProcessed = get_input()
 		newPos = global_position + inputProcessed * speed
 		# Cast raycast
-		ledgeRayCast.cast_to = inputProcessed * speed * 4
-		blockRayCast.cast_to = inputProcessed * speed * 4
-		if inputProcessed != Vector2(0, 0):
-			print(newPos-global_position)
-			print(blockRayCast.is_colliding())
-		
-		if is_instance_valid(nextPositionOverlay):
-			nextPositionOverlay.queue_free()
-		nextPositionOverlay = TextureRect.new()
-		nextPositionOverlay.texture = nextPositionTexture
-		nextPositionOverlay.rect_scale = Vector2(2, 2)
-		nextPositionOverlay.rect_position = newPos
-		get_tree().current_scene.add_child(nextPositionOverlay)
-		
-#		var goingBot = (velocity.y - velocityMemory.y)>0 and (velocity.x+velocityMemory.x)==0
-#		if (ledgeRayCast.is_colliding()) and goingBot:
-#			# Jump over ledge
-#			jumpOverLedge = true
-#			velocity = velocity.normalized() * jumpSpeed
-#			velocity = move_and_slide(velocity)
-#		if not blockRayCast.is_colliding():
-		global_position = newPos
+		ledgeRayCast.cast_to = inputProcessed * speed * 2
+		blockRayCast.cast_to = inputProcessed * speed * 2
+			
+		if not blockRayCast.is_colliding():
+			global_position = newPos
 
 func get_input():
 	
 	var input = Vector2()
 	if Input.is_action_pressed("ui_right"):
 		input.x += 1
-	if Input.is_action_pressed("ui_left"):
+	elif Input.is_action_pressed("ui_left"):
 		input.x -= 1
-	if Input.is_action_pressed("ui_down"):
+	elif Input.is_action_pressed("ui_down"):
 		input.y += 1
-	if Input.is_action_pressed("ui_up"):
+	elif Input.is_action_pressed("ui_up"):
 		input.y -= 1
 
 	# Set anim

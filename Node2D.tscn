@@ -1,4 +1,4 @@
-[gd_scene load_steps=34 format=2]
+[gd_scene load_steps=35 format=2]
 
 [ext_resource path="res://Scenes/GUI/Chat.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Scenes/Maps/PalletTown.tscn" type="PackedScene" id=2]
@@ -10,6 +10,7 @@
 [ext_resource path="res://Assets/Trees/tree.tscn" type="PackedScene" id=8]
 [ext_resource path="res://Assets/Flowers/flowers.tscn" type="PackedScene" id=9]
 [ext_resource path="res://Assets/Tilesets/ledge.png" type="Texture" id=10]
+[ext_resource path="res://Scripts/Entities/tree.gd" type="Script" id=11]
 
 [sub_resource type="ConvexPolygonShape2D" id=2]
 points = PoolVector2Array( 0, 0, 16, 0, 16, 16, 0, 16 )
@@ -418,6 +419,7 @@ position = Vector2( 440, -208 )
 
 [node name="StaticBody2D49" parent="YSort/Objects/Trees2" instance=ExtResource( 8 )]
 position = Vector2( 680, 96 )
+script = ExtResource( 11 )
 
 [node name="StaticBody2D50" parent="YSort/Objects/Trees2" instance=ExtResource( 8 )]
 position = Vector2( 808, 96 )
