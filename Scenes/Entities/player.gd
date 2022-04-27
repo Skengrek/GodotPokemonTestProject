@@ -28,11 +28,18 @@ func _physics_process(_delta):
 		var inputProcessed = get_input()
 		newPos = global_position + inputProcessed * speed
 		# Cast raycast
-		ledgeRayCast.cast_to = inputProcessed * speed * 2
-		blockRayCast.cast_to = inputProcessed * speed * 2
+		ledgeRayCast.global_position = global_position
+		blockRayCast.global_position = global_position
+		ledgeRayCast.cast_to = inputProcessed * speed * 4
+		blockRayCast.cast_to = inputProcessed * speed * 4 
 			
 		if not blockRayCast.is_colliding():
 			global_position = newPos
+		else:
+			if ledgeRayCast.is_colliding() and inputProcessed==Vector2(0, 1):
+				global_position = newPos
+			else:
+				global_position = global_position - inputProcessed
 
 func get_input():
 	
@@ -59,6 +66,5 @@ func get_input():
 			animState.travel('Idle')
 			emit_signal("playerStoppedMoving")
 			isMoving = false
-
 	return input
 

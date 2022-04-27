@@ -74,7 +74,6 @@ func change_group():
 	
 	
 func addMessage(username, text, channel = '', color = ''):
-	print(text)
 	if channel == '':
 		channel = catKey
 	chatLog.bbcode_text += '' 
