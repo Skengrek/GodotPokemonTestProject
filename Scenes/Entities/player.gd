@@ -15,7 +15,9 @@ onready var animTree = $playerAnimTree
 onready var animState = animTree.get('parameters/playback')
 onready var ledgeRayCast = $LedgeRayCast
 onready var blockRayCast = $BlockingRayCast
+onready var ball = preload("res://Scenes/Entities/ball.tscn")
 var jumpOverLedge: bool = false
+var direction = Vector2.DOWN
 
 func _ready():
 	animState.start('Idle')
@@ -52,7 +54,10 @@ func get_input():
 		input.y += 1
 	elif Input.is_action_pressed("ui_up"):
 		input.y -= 1
-
+	
+	if Input.is_action_pressed("use"):
+		fire()
+		
 	# Set anim
 	if input != Vector2(0, 0):
 		if isMoving == false:
@@ -61,10 +66,18 @@ func get_input():
 			isMoving = true
 		animTree.set('parameters/Walk/blend_position', input)
 		animTree.set('parameters/Idle/blend_position', input)
+		direction = input
 	else:
 		if isMoving == true:
 			animState.travel('Idle')
 			emit_signal("playerStoppedMoving")
 			isMoving = false
 	return input
+	
+func fire():
+	var bullet = ball.instance()
+	bullet.visible = true
+	bullet.direction = direction
+	bullet.global_position = global_position
+	get_tree().get_root().add_child(bullet)
 
