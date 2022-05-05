@@ -15,7 +15,11 @@ onready var animTree = $playerAnimTree
 onready var animState = animTree.get('parameters/playback')
 onready var ledgeRayCast = $LedgeRayCast
 onready var blockRayCast = $BlockingRayCast
-onready var ball = preload("res://Scenes/Entities/ball.tscn")
+onready var cooldown = $Cooldown
+var canShoot = true
+
+onready var ballScene = preload("res://Scenes/Entities/Ball.tscn")
+
 var jumpOverLedge: bool = false
 var direction = Vector2.DOWN
 
@@ -25,9 +29,10 @@ func _ready():
 func setMovement(_bool):
 	canMove = _bool
 
-func _physics_process(_delta):
+func _physics_process(delta):
 	if canMove:
-		var inputProcessed = get_input()
+		var inputProcessed = get_input(delta)
+		setAnim(inputProcessed)
 		newPos = global_position + inputProcessed * speed
 		# Cast raycast
 		ledgeRayCast.global_position = global_position
@@ -43,21 +48,8 @@ func _physics_process(_delta):
 			else:
 				global_position = global_position - inputProcessed
 
-func get_input():
-	
-	var input = Vector2()
-	if Input.is_action_pressed("ui_right"):
-		input.x += 1
-	elif Input.is_action_pressed("ui_left"):
-		input.x -= 1
-	elif Input.is_action_pressed("ui_down"):
-		input.y += 1
-	elif Input.is_action_pressed("ui_up"):
-		input.y -= 1
-	
-	if Input.is_action_pressed("use"):
-		fire()
-		
+
+func setAnim(input):
 	# Set anim
 	if input != Vector2(0, 0):
 		if isMoving == false:
@@ -72,12 +64,34 @@ func get_input():
 			animState.travel('Idle')
 			emit_signal("playerStoppedMoving")
 			isMoving = false
-	return input
-	
-func fire():
-	var bullet = ball.instance()
-	bullet.visible = true
-	bullet.direction = direction
-	bullet.global_position = global_position
-	get_tree().get_root().add_child(bullet)
 
+
+func get_input(_delta):
+	var input = Vector2()
+	if Input.is_action_pressed("ui_right"):
+		input.x += 1
+	elif Input.is_action_pressed("ui_left"):
+		input.x -= 1
+	elif Input.is_action_pressed("ui_down"):
+		input.y += 1
+	elif Input.is_action_pressed("ui_up"):
+		input.y -= 1
+	
+	if Input.is_action_pressed("shoot"):
+		fire()
+		
+	return input
+
+
+func fire():
+	if canShoot:
+		var _ball = ballScene.instance()
+		_ball.position = position
+		_ball.direction = direction
+		get_parent().add_child(_ball)
+		canShoot = false
+		cooldown.start()
+
+
+func _on_Cooldown_timeout():
+	canShoot = true

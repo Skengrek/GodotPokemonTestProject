@@ -561,10 +561,7 @@ scale = Vector2( 1, 1 )
 position = Vector2( 0, -16 )
 scale = Vector2( 1, 1 )
 
-[node name="Ball" parent="YSort/Objects" instance=ExtResource( 11 )]
-visible = false
-collision_layer = 9
-collision_mask = 4
+[node name="Ball" parent="YSort" instance=ExtResource( 11 )]
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 offset = Vector2( 5, -5 )

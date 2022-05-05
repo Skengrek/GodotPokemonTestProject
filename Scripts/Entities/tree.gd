@@ -1,16 +1,19 @@
 extends StaticBody2D
 
 
-# Declare member variables here. Examples:
-# var a = 2
-# var b = "text"
+var fireRate = 1 # seconds
+var damage = 1 
 
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	pass
-	# Tree pos (680, 96) (404, 52)
+	
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-#func _process(delta):
-#	pass
+func setOptions(newFireRate, newDamage):
+	fireRate = newFireRate
+	damage = newDamage
+	
+	
+func fire():
+
