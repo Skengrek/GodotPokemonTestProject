@@ -87,7 +87,7 @@ func fire():
 	if canShoot:
 		var _ball = ballScene.instance()
 		_ball.position = position
-		_ball.direction = direction
+		_ball.direction = get_global_mouse_position() - global_position
 		get_parent().add_child(_ball)
 		canShoot = false
 		cooldown.start()

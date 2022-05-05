@@ -1,4 +1,4 @@
-[gd_scene load_steps=35 format=2]
+[gd_scene load_steps=36 format=2]
 
 [ext_resource path="res://Scenes/GUI/Chat.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Scenes/Maps/PalletTown.tscn" type="PackedScene" id=2]
@@ -11,6 +11,7 @@
 [ext_resource path="res://Assets/Flowers/flowers.tscn" type="PackedScene" id=9]
 [ext_resource path="res://Assets/Tilesets/ledge.png" type="Texture" id=10]
 [ext_resource path="res://Scenes/Entities/Ball.tscn" type="PackedScene" id=11]
+[ext_resource path="res://Scenes/Entities/Monster.tscn" type="PackedScene" id=12]
 
 [sub_resource type="ConvexPolygonShape2D" id=2]
 points = PoolVector2Array( 0, 0, 16, 0, 16, 16, 0, 16 )
@@ -562,6 +563,10 @@ position = Vector2( 0, -16 )
 scale = Vector2( 1, 1 )
 
 [node name="Ball" parent="YSort" instance=ExtResource( 11 )]
+
+[node name="Monster" parent="YSort" instance=ExtResource( 12 )]
+position = Vector2( 358, 234 )
+scale = Vector2( 4, 4 )
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 offset = Vector2( 5, -5 )
