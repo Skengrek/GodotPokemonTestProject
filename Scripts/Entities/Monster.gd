@@ -14,7 +14,3 @@ func hit(dmg):
 	life -= dmg
 	if life<=0:
 		queue_free()
-
-
-func _process(delta):
-	lifeBar.value = life
