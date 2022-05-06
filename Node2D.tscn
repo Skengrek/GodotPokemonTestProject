@@ -733,6 +733,7 @@ scale = Vector2( 1, 1 )
 
 [node name="Ball" parent="YSort" instance=ExtResource( 11 )]
 visible = false
+collision_mask = 22
 
 [node name="Monster" parent="YSort" instance=ExtResource( 12 )]
 position = Vector2( 358, 234 )
