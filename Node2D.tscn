@@ -735,7 +735,7 @@ scale = Vector2( 1, 1 )
 visible = false
 collision_mask = 22
 
-[node name="Monster" parent="YSort" instance=ExtResource( 12 )]
+[node name="Bulbizard" parent="YSort" instance=ExtResource( 12 )]
 position = Vector2( 358, 234 )
 scale = Vector2( 4, 4 )
 
@@ -744,6 +744,7 @@ offset = Vector2( 5, -5 )
 transform = Transform2D( 1, 0, 0, 1, 5, -5 )
 
 [node name="Chat" parent="CanvasLayer" instance=ExtResource( 1 )]
+visible = false
 anchor_right = 0.0
 anchor_bottom = 1.0
 margin_top = 400.0
