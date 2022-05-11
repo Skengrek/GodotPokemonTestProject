@@ -1,7 +1,7 @@
 extends Node
 
 onready var chat = get_node('/root/Node2D/CanvasLayer/Chat')
-onready var player = get_node('/root/Node2D/YSort/Player')
+onready var player = $FlyNavigation/WalkNavigation/YSort/Player
 onready var server = get_node('/root/Server')
 
 
