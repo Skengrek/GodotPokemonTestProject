@@ -6,7 +6,7 @@ var life = 100
 var alive = true
 var rng = RandomNumberGenerator.new()
 
-var state = 0x00000
+var state = 0b01
 
 onready var cooldown = $Cooldown
 var canAttack = true
@@ -75,4 +75,5 @@ func generateNewCoordinate():
 
 
 func _on_AggroArea_body_entered(body):
-	print(body)
+	if body.name == "Player":
+		nextPosition = body.global_position

@@ -3,18 +3,16 @@ extends KinematicBody2D
 signal playerIsMoving
 signal playerStoppedMoving
 
+var state = 0b00
+
 export (int)var speed = 300
 export var jumpSpeed = 400
 var newPos = Vector2()
 var canMove = true
-const nextPositionTexture = preload("res://Assets/UI/ui_arrow_left_right.png")
-var nextPositionOverlay: TextureRect = null
 
 onready var isMoving = false
 onready var animTree = $playerAnimTree
 onready var animState = animTree.get('parameters/playback')
-onready var ledgeRayCast = $LedgeRayCast
-onready var blockRayCast = $BlockingRayCast
 onready var cooldown = $Cooldown
 var canShoot = true
 var velocity = Vector2.ZERO
@@ -34,21 +32,7 @@ func _physics_process(_delta):
 	if canMove:
 		get_input()
 		setAnim()
-		
 		move_and_slide(velocity*speed)
-#		# Cast raycast
-#		ledgeRayCast.global_position = global_position
-#		blockRayCast.global_position = global_position
-#		ledgeRayCast.cast_to = inputProcessed * speed * 4
-#		blockRayCast.cast_to = inputProcessed * speed * 4 
-#
-#		if not blockRayCast.is_colliding():
-#			global_position = newPos
-#		else:
-#			if ledgeRayCast.is_colliding() and inputProcessed==Vector2(0, 1):
-#				global_position = newPos
-#			else:
-#				global_position = global_position - inputProcessed
 
 
 func setAnim():
