@@ -6,7 +6,7 @@ var life = 100
 var alive = true
 var rng = RandomNumberGenerator.new()
 
-var state = 0b01
+var state = "alone"
 
 onready var cooldown = $Cooldown
 var canAttack = true
