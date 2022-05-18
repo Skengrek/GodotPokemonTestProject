@@ -14,6 +14,8 @@ onready var animPlayer = $AnimationTree
 onready var animState = animPlayer.get('parameters/playback')
 onready var attackRayCast = $RayCasts/attack
 
+onready var tranchHerb = preload("res://Assets/Pokemon/tranchHerb.tscn")
+
 var velocity = Vector2.ZERO
 var canMove = true
 
@@ -37,6 +39,10 @@ func hit(dmg):
 func _process(_delta):
 	if attackRayCast.is_colliding() and canAttack:
 		animState.start('Attack')
+		var tranchHerbInst = tranchHerb.instance()
+		tranchHerbInst.position = position
+		tranchHerbInst.direction = velocity
+		get_parent().add_child(tranchHerbInst)
 		
 		
 func _physics_process(delta):

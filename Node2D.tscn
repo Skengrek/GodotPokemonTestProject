@@ -607,14 +607,14 @@ tile_data = PoolIntArray( 852000, 0, 0, 852001, 0, 1, 852002, 0, 1, 852003, 0, 1
 position = Vector2( 0, -1 )
 scale = Vector2( 0.5, 0.5 )
 
-[node name="House" parent="FlyNavigation/WalkNavigation/YSort" instance=ExtResource( 13 )]
-position = Vector2( 1886, -142 )
-scale = Vector2( 4, 4 )
-
 [node name="Player" parent="FlyNavigation/WalkNavigation/YSort" instance=ExtResource( 3 )]
 position = Vector2( 0, 0 )
 scale = Vector2( 2, 2 )
 collision_mask = 54
+
+[node name="House" parent="FlyNavigation/WalkNavigation/YSort" instance=ExtResource( 13 )]
+position = Vector2( 1886, -142 )
+scale = Vector2( 4, 4 )
 
 [node name="Objects" parent="FlyNavigation/WalkNavigation/YSort" instance=ExtResource( 2 )]
 
@@ -856,7 +856,7 @@ collision_mask = 22
 [node name="Bulbizard" parent="FlyNavigation/WalkNavigation/YSort" instance=ExtResource( 12 )]
 position = Vector2( 644, 342 )
 scale = Vector2( 4, 4 )
-collision_mask = 1
+collision_mask = 63
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 offset = Vector2( 5, -5 )
